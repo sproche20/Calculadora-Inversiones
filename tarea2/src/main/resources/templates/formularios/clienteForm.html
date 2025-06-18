@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario de Cliente</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 220px;
+            background-color: #2c3e50;
+            height: 100vh;
+            padding: 20px;
+            color: white;
+        }
+
+        .sidebar h3 {
+            color: #ecf0f1;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #ecf0f1;
+            padding: 10px;
+            text-decoration: none;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+
+        .sidebar a:hover {
+            background-color: #34495e;
+        }
+
+        /* Main content */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            background-color: #eef;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 500px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        input, label {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <h3>Menú</h3>
+    <a href="/clientes/clienteForm">Formulario Cliente</a>
+    <a href="/clientes/clienteTable">Tabla Clientes</a>
+    <a href="/inversiones/inversionform">Formulario Inversión</a>
+    <a href="/inversiones/lista">Tabla Inversiones</a>
+</div>
+
+<!-- Main content -->
+<div class="main-content">
+    <div class="form-container">
+        <h2>Registrar Cliente</h2>
+        <form th:action="@{/clientes/guardarCliente}" th:object="${nuevo}" method="post">
+
+            <label>Nombre:</label>
+            <div th:if="${#fields.hasErrors('nombres')}" th:errors="*{nombres}" class="error"></div>
+            <input type="text" th:field="*{nombres}" placeholder="Nombre completo" />
+
+            <label>Cédula:</label>
+            <div th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}" class="error"></div>
+            <input type="text" th:field="*{cedula}" placeholder="Número de cédula" />
+
+            <label>Email:</label>
+            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></div>
+            <input type="email" th:field="*{email}" placeholder="Correo electrónico" />
+
+            <label>Celular:</label>
+            <div th:if="${#fields.hasErrors('celular')}" th:errors="*{celular}" class="error"></div>
+            <input type="text" th:field="*{celular}" placeholder="Número celular" />
+
+            <input type="submit" value="Guardar Cliente" />
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
+
